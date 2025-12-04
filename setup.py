@@ -3,41 +3,51 @@ from setuptools import setup, find_packages
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+with open("requirements.txt", "r", encoding="utf-8") as fh:
+    requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+
 setup(
     name="loan-risk-predictor",
     version="1.0.0",
     author="Shanujan Suresh",
     author_email="shanujansh@gmail.com",
-    description="Machine learning model for loan default risk prediction",
+    description="A machine learning package for predicting loan default risk",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/shanujans/loan-risk-prediction",
-    packages=find_packages(where="src"),
+    url="https://github.com/yourusername/loan-risk-prediction",
     package_dir={"": "src"},
+    packages=find_packages(where="src"),
     classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Financial and Insurance Industry",
-        "Topic :: Office/Business :: Financial :: Investment",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Operating System :: OS Independent",
     ],
     python_requires=">=3.8",
-    install_requires=[
-        "numpy>=1.21.0",
-        "pandas>=1.3.0",
-        "scikit-learn>=1.0.0",
-        "xgboost>=1.5.0",
-        "matplotlib>=3.5.0",
-        "seaborn>=0.11.0",
-        "joblib>=1.1.0",
-    ],
+    install_requires=requirements,
     extras_require={
-        "dev": ["pytest", "black", "flake8"],
-        "notebook": ["jupyter", "ipykernel"],
+        "dev": [
+            "pytest>=7.0",
+            "pytest-cov>=4.0",
+            "black>=23.0",
+            "flake8>=6.0",
+            "mypy>=1.0",
+        ],
+        "docs": [
+            "sphinx>=7.0",
+            "sphinx-rtd-theme>=1.0",
+        ]
     },
     entry_points={
         "console_scripts": [
-            "loan-predict=src.cli:main",
+            "loan-risk-predict=loan_risk_predictor.predict:main",
         ],
     },
+    include_package_data=True,
 )
