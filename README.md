@@ -23,7 +23,7 @@ pip install loan-risk-predictor
 
 ### From Source
 ```bash
-git clone https://github.com/yourusername/loan-risk-prediction.git
+git clone https://github.com/shanujans/loan-risk-prediction.git
 cd loan-risk-prediction
 pip install -e .
 ```
