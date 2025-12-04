@@ -3,13 +3,10 @@ from setuptools import setup, find_packages
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-with open("requirements.txt", "r", encoding="utf-8") as fh:
-    requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
-
 setup(
     name="loan-risk-predictor",
     version="1.0.0",
-    author="Shanujan Suresh",
+    author="shanujansh@gmail.com",
     author_email="shanujansh@gmail.com",
     description="A machine learning package for predicting loan default risk",
     long_description=long_description,
@@ -21,7 +18,6 @@ setup(
         "Development Status :: 4 - Beta",
         "Intended Audience :: Financial and Insurance Industry",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
-        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -30,7 +26,15 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.8",
-    install_requires=requirements,
+    install_requires=[
+        "numpy>=1.24.0",
+        "pandas>=2.0.0",
+        "scikit-learn>=1.3.0",
+        "xgboost>=1.7.0",
+        "matplotlib>=3.7.0",
+        "seaborn>=0.12.0",
+        "joblib>=1.2.0",
+    ],
     extras_require={
         "dev": [
             "pytest>=7.0",
@@ -38,6 +42,7 @@ setup(
             "black>=23.0",
             "flake8>=6.0",
             "mypy>=1.0",
+            "pre-commit>=3.0",
         ],
         "docs": [
             "sphinx>=7.0",

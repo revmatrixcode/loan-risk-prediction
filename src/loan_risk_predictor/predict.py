@@ -121,3 +121,67 @@ def get_model_info(model_path: str = DEFAULT_MODEL_PATH) -> Dict[str, Any]:
     }
     
     return info
+
+def main():
+    """
+    Command-line interface for loan risk prediction
+    """
+    import argparse
+    import sys
+    
+    parser = argparse.ArgumentParser(
+        description='Predict loan risk from command line'
+    )
+    parser.add_argument(
+        '--input', 
+        type=str, 
+        required=True,
+        help='Input CSV file path'
+    )
+    parser.add_argument(
+        '--output',
+        type=str,
+        default='predictions.csv',
+        help='Output file path (default: predictions.csv)'
+    )
+    parser.add_argument(
+        '--threshold',
+        type=float,
+        default=0.5,
+        help='Decision threshold (default: 0.5)'
+    )
+    
+    args = parser.parse_args()
+    
+    try:
+        # Make predictions
+        results = predict_batch(
+            args.input,
+            output_path=args.output,
+            threshold=args.threshold
+        )
+        
+        print(f"Predictions saved to {args.output}")
+        print(f"Total applications processed: {len(results)}")
+        
+        # Show summary
+        approved = len(results[results['decision'] == 'APPROVE'])
+        rejected = len(results[results['decision'] == 'REJECT'])
+        
+        print(f"\n📈 Summary:")
+        print(f"  Approved: {approved} ({approved/len(results):.1%})")
+        print(f"  Rejected: {rejected} ({rejected/len(results):.1%})")
+        
+        # Risk level distribution
+        print(f"\n Risk Levels:")
+        for level in ['LOW', 'MEDIUM', 'HIGH']:
+            count = len(results[results['risk_level'] == level])
+            print(f"  {level}: {count} ({count/len(results):.1%})")
+        
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

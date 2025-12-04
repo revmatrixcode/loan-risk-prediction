@@ -8,14 +8,13 @@ version = "1.0.0"
 description = "A machine learning package for predicting loan default risk"
 readme = "README.md"
 authors = [
-    {name = "Shanujan Suresh", email = "shanujansh@gmail.com"}
+    {name = "Shanujan", email = "shanujansh@gmail.com"}
 ]
 license = {text = "MIT"}
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Financial and Insurance Industry",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -51,6 +50,13 @@ docs = [
 Homepage = "https://github.com/shanujans/loan-risk-prediction"
 BugTracker = "https://github.com/shanujans/loan-risk-prediction/issues"
 Documentation = "https://github.com/shanujans/loan-risk-prediction#readme"
+
+[tool.setuptools]
+packages = ["loan_risk_predictor"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.dynamic]
+# Remove scripts section from here since it's causing issues
 
 [tool.black]
 line-length = 88
